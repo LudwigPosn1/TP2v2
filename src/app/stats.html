@@ -1,0 +1,14 @@
+<div class="stats-container">
+  <h2>Tableau de bord / Statistiques</h2>
+
+  <div class="kpi-card">
+    <p><strong>Total des tâches :</strong> {{ total() }}</p>
+    <p><strong>Tâches terminées :</strong> {{ done() }}</p>
+    <p><strong>Tâches à faire :</strong> {{ remaining() }}</p>
+    <p><strong>Pourcentage accompli :</strong> {{ percent() }} %</p>
+  </div>
+
+  <nav>
+    <a routerLink="/">Retour à la liste des tâches</a>
+  </nav>
+</div>

@@ -1,0 +1,42 @@
+<div class="task-container">
+  <!-- Barre de recherche et filtres -->
+  <div class="filters">
+    <input 
+      type="text" 
+      placeholder="Rechercher une tâche..." 
+      #q 
+      (input)="query.set(q.value)"
+    />
+
+    <button (click)="status.set('all')" [class.active]="status() === 'all'">Toutes</button>
+    <button (click)="status.set('todo')" [class.active]="status() === 'todo'">À faire</button>
+    <button (click)="status.set('done')" [class.active]="status() === 'done'">Faites</button>
+  </div>
+
+  <!-- Compteur de tâches -->
+  <p>{{ visible().length }} tâche(s) affichée(s)</p>
+
+  <!-- Liste des tâches avec la boucle moderne @for (diapositive 36 et 54) -->
+  <ul>
+    @for (task of visible(); track task.id) {
+      <li [class.done]="task.done">
+        <label>
+          <input 
+            type="checkbox" 
+            [checked]="task.done" 
+            (change)="store.toggle(task.id)"
+          />
+          <span class="title">{{ task.title }}</span>
+        </label>
+
+        @if (task.dueDate) {
+          <span class="due-date">📅 {{ task.dueDate }}</span>
+        }
+
+        <button class="delete-btn" (click)="store.remove(task.id)">Supprimer</button>
+      </li>
+    } @empty {
+      <p>Aucune tâche pour le moment.</p>
+    }
+  </ul>
+</div>
